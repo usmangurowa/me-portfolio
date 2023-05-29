@@ -43,37 +43,40 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="w-full">
-      <ul className="container flex flex-row items-center w-full px-5 space-x-5 laptop:px-24">
-        <li className="py-4">
-          <Link href={"/"}>Gurowa</Link>
-        </li>
-        <li className="flex-grow" />
-        {links.map((link, index) => (
-          <li key={index} className="relative hidden py-4 group laptop:block">
-            <Link href={link.link}>{link.name}</Link>
-            <div
-              className={`h-[2px] mt-2 mx-auto transition-all duration-300 ease-in-out dark:bg-white bg-gray-950 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-full ${
-                hash === link.link ? "!w-full opacity-100" : "w-1 opacity-0"
-              }`}
-            />
+    <>
+      <nav className="fixed top-0 z-50 w-full border-b dark:border-gray-800 backdrop-blur-md">
+        <ul className="container flex flex-row items-center w-full px-5 space-x-5 laptop:px-24">
+          <li className="py-4">
+            <Link href={"/"}>Usman Hassan</Link>
           </li>
-        ))}
-        {/* {hash} */}
-        <li className="laptop:hidden">
-          <MenuButton />
-        </li>
-        <li>
-          <IconButton size="sm" onClick={toggleTheme}>
-            {theme === "dark" ? (
-              <SunIcon className="dark:text-white text-gray-950" />
-            ) : (
-              <MoonIcon className="dark:text-white text-gray-950" />
-            )}
-          </IconButton>
-        </li>
-      </ul>
-    </nav>
+          <li className="flex-grow" />
+          {links.map((link, index) => (
+            <li key={index} className="relative hidden py-4 group laptop:block">
+              <Link href={link.link}>{link.name}</Link>
+              <div
+                className={`h-[2px] mt-2 mx-auto transition-all duration-300 ease-in-out dark:bg-white bg-gray-950 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-full ${
+                  hash === link.link ? "!w-full opacity-100" : "w-1 opacity-0"
+                }`}
+              />
+            </li>
+          ))}
+          {/* {hash} */}
+          <li className="laptop:hidden">
+            <MenuButton />
+          </li>
+          <li>
+            <IconButton size="sm" onClick={toggleTheme}>
+              {theme === "dark" ? (
+                <SunIcon className="dark:text-white text-gray-950" />
+              ) : (
+                <MoonIcon className="dark:text-white text-gray-950" />
+              )}
+            </IconButton>
+          </li>
+        </ul>
+      </nav>
+      <div className="h-16" />
+    </>
   );
 };
 
