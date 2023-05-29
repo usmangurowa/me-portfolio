@@ -1,104 +1,111 @@
-import Button from "@/components/common/Button";
 import React from "react";
-import { useTheme } from "next-themes";
-import Input from "@/components/common/Input";
-import { EyeClosedIcon, EyeOpenIcon, Cross1Icon } from "@radix-ui/react-icons";
-
-import IconButton from "@/components/common/IconButton";
+import { Poppins } from "@next/font/google";
+import Image from "next/image";
+import Balancer from "react-wrap-balancer";
+import {
+  TwitterLogoIcon,
+  GitHubLogoIcon,
+  InstagramLogoIcon,
+} from "@radix-ui/react-icons";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import Button from "@/components/common/Button";
+import useSWR from "swr";
 
-const Index = () => {
-  const { setTheme, theme } = useTheme();
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
-  const switchTeam = () => setTheme(theme === "light" ? "dark" : "light");
+const socials = [
+  {
+    name: "Twitter",
+    icon: <TwitterLogoIcon className="w-5 h-5" />,
+    link: "https://twitter.com/usmangurowa",
+  },
+  {
+    name: "Github",
+    icon: <GitHubLogoIcon className="w-5 h-5" />,
+    link: "https://github.com/usmangurowa",
+  },
+  {
+    name: "Instagram",
+    icon: <InstagramLogoIcon className="w-5 h-5" />,
+    link: "https://instagram.com/usmangurowa",
+  },
+];
+
+const Main = () => {
   return (
-    <div className="flex flex-col gap-5 items-center justify-center ">
-      <h1 className="text-4xl font-bold">Hello World</h1>
-      <Button
-        left={theme === "light" ? <EyeClosedIcon /> : <EyeOpenIcon />}
-        loading
-        rounded="lg"
-        size="lg"
-        className=""
-        onClick={switchTeam}
+    <main
+      className={`${poppins.className} container max-w-4xl py-5 mx-auto flex flex-col laptop:flex-row items-center gap-10 h-fit overflow-hidden`}
+    >
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="relative w-40 h-40 border rounded-full shadow-lg shadow-black animate-pulse hover:animate-spin"
       >
-        Switch Theme
-      </Button>
-      <Button
-        left={theme === "light" ? <EyeClosedIcon /> : <EyeOpenIcon />}
-        // loading
-        disabled
-        rounded="lg"
-        size="lg"
-        className=""
-        onClick={switchTeam}
-      >
-        Switch Theme
-      </Button>
-      <Link href={"/demo"}>
-        <Button
-          // left={theme === "light" ? <EyeClosedIcon /> : <EyeOpenIcon />}
-          rounded="lg"
-          size="sm"
-          className=""
-          mode="outline"
-          // onClick={switchTeam}
-        >
-          Demo
-        </Button>
-      </Link>
-      <Button
-        left={theme === "light" ? <EyeClosedIcon /> : <EyeOpenIcon />}
-        rounded="lg"
-        size="sm"
-        className=""
-        mode="text"
-        onClick={switchTeam}
-      >
-        Switch Theme
-      </Button>
-      <IconButton loading mode="outline" onClick={switchTeam}>
-        {theme === "light" ? <EyeClosedIcon /> : <EyeOpenIcon />}
-      </IconButton>
-      <IconButton mode="text">
-        <Cross1Icon color="#fff" />
-      </IconButton>
-      <Input size="sm" type="text" placeholder="Enter your name" />
-      <Input
-        size="sm"
-        type="text"
-        placeholder="Enter your name"
-        mode="outline"
-      />
-      <div className="w-full container grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 gap-10 my-10">
-        <div className="p-5 relative w-full h-fit rounded-2xl dark:bg-gray-900">
-          <h1 className="text-2xl">Lorem ipsum dolor sit amet.</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          </p>
+        <Image
+          src={require("../public/me.jpg")}
+          fill
+          alt="Profile"
+          className="rounded-full"
+        />
+      </motion.div>
+      <div className="flex-1 space-y-2 text-center laptop:text-left">
+        <Balancer>
+          <h1
+            title="Full Stack Developer"
+            className="text-xl font-bold dark:text-white tablet:text-2xl laptop:text-3xl animate-fade-up duration-900"
+          >
+            Usman Hassan
+          </h1>
+        </Balancer>
+        <div className="flex flex-row items-center justify-center space-x-4 text-lg duration-700 animate-fade-up laptop:justify-start">
+          {socials.map((social, index) => (
+            <Link target="_blank" title={social.name} href={social.link}>
+              {social.icon}
+            </Link>
+          ))}
         </div>
-        <div className="p-5 relative w-full h-fit rounded-2xl dark:bg-gray-900">
-          <h1 className="text-2xl">Lorem ipsum dolor sit amet.</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+        <Balancer>
+          <p className="text-sm duration-1000 animate-fade-up">
+            I am a full stack developer with 3 years of experience in web and
+            mobile development. I have worked on many projects and have a good
+            understanding of the technologies i use.
           </p>
-        </div>
-        <div className="p-5 relative w-full h-fit rounded-2xl dark:bg-gray-900">
-          <h1 className="text-2xl">Lorem ipsum dolor sit amet.</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          </p>
-        </div>
-        <div className="p-5 relative w-full h-fit rounded-2xl dark:bg-gray-900">
-          <h1 className="text-2xl">Lorem ipsum dolor sit amet.</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          </p>
+        </Balancer>
+        <div className="flex flex-row items-center justify-center space-x-2 laptop:justify-start">
+          <Button
+            rounded="full"
+            className="w-40 text-sm font-semibold text-gray-950"
+          >
+            Projects
+          </Button>
+          <Button
+            rounded="full"
+            mode="outline"
+            className="w-40 text-sm font-semibold !text-gray-950 dark:!text-white"
+          >
+            Contact Me
+          </Button>
         </div>
       </div>
-    </div>
+      <Projects />
+    </main>
   );
 };
 
-export default Index;
-// [&>*]:invisible
+export default Main;
+
+// const projects = []
+
+const Projects = () => {
+  const { data, error, isLoading, isValidating, mutate } = useSWR(
+    `https://api.github.com/users/usmangurowa/repos`
+  );
+
+  console.log({ data, error });
+
+  return <div></div>;
+};

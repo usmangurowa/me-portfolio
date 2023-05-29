@@ -1,3 +1,4 @@
+import { GITHUBTOKEN } from "@/lib/constants";
 import Axios from "axios";
 import { getCookie } from "cookies-next";
 const axios = Axios.create({
@@ -7,6 +8,9 @@ const axios = Axios.create({
 axios.interceptors.request.use(
   (config) => {
     config.headers["Authorization"] = `Bearer ${getCookie("token")}`;
+    if (config.url?.startsWith("https://api.github.com")) {
+      config.headers["Authorization"] = `Bearer ${GITHUBTOKEN}`;
+    }
     return config;
   },
   (error) => {

@@ -35,7 +35,7 @@ function localStorageProvider(): any {
 const fetcher = async (url: string) => {
   const res = await axios.get(url);
 
-  if (res.statusText !== "OK") {
+  if (res.status !== 200) {
     const error = new Error("An error occurred while fetching the data.");
     // @ts-ignore
     error.info = res.data;

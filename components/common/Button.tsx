@@ -49,9 +49,9 @@ const Button = ({
       "active:scale-[.99]": !(loading || disabled),
       "opacity-50": disabled,
       "text-primary dark:text-primary-400 bg-transparent": mode === "text",
-      "bg-primary hover:bg-primary-600 active:bg-primary-700 dark:bg-primary-400 hover:dark-bg-primary-300 active:dark:bg-primary text-white":
+      "bg-primary hover:bg-primary-600 active:bg-primary-700 dark:bg-primary-400 hover:dark-bg-primary-300 active:dark:bg-primary text-gray-950 dark:text-white":
         mode === "solid",
-      "bg-transparent border-primary hover:bg-primary-50 dark:border-primary-400  text-primary dark:text-primary-400 border":
+      "bg-transparent border-primary hover:bg-primary-50 hover:dark:bg-primary-900 dark:border-primary-400  text-primary dark:text-primary-400 border":
         mode === "outline",
       "[&>.loader]:visible [&>*]:invisible": loading,
     },
@@ -65,8 +65,8 @@ const Button = ({
   return (
     <button className={classes} disabled={disabled || loading} {...props}>
       {loading && (
-        <div className="loader absolute w-full h-full flex items-center justify-center">
-          <ThreeDotsMiddle color={mode === "solid" ? "#fff" : "#4287f5"} />
+        <div className="absolute flex items-center justify-center w-full h-full loader">
+          <ThreeDotsMiddle color={mode === "solid" ? "#fff" : "#000"} />
         </div>
       )}
       {left}
@@ -77,5 +77,3 @@ const Button = ({
 };
 
 export default React.memo(Button);
-
-const tmp = <span className="scale-[.99]"></span>;

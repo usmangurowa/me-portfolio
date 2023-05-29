@@ -9,19 +9,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#4287f5",
-        "primary-50": "#eff6ff",
-        "primary-100": "#dbeafe",
-        "primary-200": "#bfdbfe",
-        "primary-300": "#94c6fc",
-        "primary-400": "#61a6f9",
-        "primary-500": "#4287f5",
-        "primary-600": "#2665ea",
-        "primary-700": "#1e50d7",
-        "primary-800": "#1f42ae",
-        "primary-900": "#1f3b89",
-        "primary-950": "#172554",
-
         "gray-50": "#f7f7f7", // light mode background
         "gray-100": "#e3e3e3", // dark mode text
         "gray-200": "#c8c8c8",
@@ -34,6 +21,19 @@ module.exports = {
         // "gray-900": "#313131", // light mode text
         "gray-900": "#1E1E1E", // light mode text
         "gray-950": "#121212", // dark mode background
+
+        primary: "#FFE071",
+        "primary-50": "#fffbeb",
+        "primary-100": "#fff3c6",
+        "primary-200": "#ffe071",
+        "primary-300": "#ffd24a",
+        "primary-400": "#ffbd20",
+        "primary-500": "#f99b07",
+        "primary-600": "#dd7302",
+        "primary-700": "#b75006",
+        "primary-800": "#943d0c",
+        "primary-900": "#7a320d",
+        "primary-950": "#461902",
 
         // light: {
         //   primary: "#4287f5",
@@ -52,13 +52,60 @@ module.exports = {
         //   "subtle-shade": "#1E1E1E",
         // },
       },
+      animation: {
+        // Fade up and down
+        "fade-up": "fade-up 0.5s",
+        "fade-down": "fade-down 0.5s",
+        // Tooltip
+        "slide-up-fade": "slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+      },
+      keyframes: {
+        // Fade up and down
+        "fade-up": {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(10px)",
+          },
+          "80%": {
+            opacity: 0.6,
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0px)",
+          },
+        },
+        "fade-down": {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(-10px)",
+          },
+          "80%": {
+            opacity: 0.6,
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0px)",
+          },
+        },
+        // Tooltip
+        "slide-up-fade": {
+          "0%": { opacity: 0, transform: "translateY(6px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        "slide-down-fade": {
+          "0%": { opacity: 0, transform: "translateY(-6px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+      },
     },
     container: {
       center: true,
       padding: {
         DEFAULT: "1rem",
-        sm: "2rem",
-        lg: "4rem",
+        tablet: "2rem",
+        laptop: "4rem",
+        desktop: "5rem",
         xl: "5rem",
         "2xl": "6rem",
       },
@@ -67,6 +114,7 @@ module.exports = {
       tablet: "640px",
       laptop: "1024px",
       desktop: "1280px",
+      "2xl": "1536px",
     },
   },
   variants: {
