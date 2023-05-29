@@ -104,8 +104,8 @@ const Main = () => {
             <Balancer>More About Me</Balancer>
           </h1>
           <p>
-            Hi 👋🏿! I'm Usman Hassan, a software developer with over 3 years of
-            experience. I specialize in building dynamic websites and mobile
+            Hi 👋🏿! {"I'm"} Usman Hassan, a software developer with over 3 years
+            of experience. I specialize in building dynamic websites and mobile
             applications using React, Next.js, React Native, and Expo.
           </p>
           <p>
@@ -119,10 +119,16 @@ const Main = () => {
             strangers on the internet.
           </p>
           <p>
-            If you're seeking a dedicated developer to transform your vision
-            into reality, let's connect and create something remarkable
+            If {"you're"} seeking a dedicated developer to transform your vision
+            into reality, {"let's"} connect and create something remarkable
             together!
           </p>
+        </div>
+        <div>
+          <h1 className="text-lg font-semibold">
+            <Balancer>Tools</Balancer>
+          </h1>
+          <p>Here are the list of Languages, Frameworks and Tools i use.</p>
         </div>
         {/* <Projects /> */}
       </main>
