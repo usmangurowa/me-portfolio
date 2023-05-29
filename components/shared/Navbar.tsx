@@ -9,6 +9,9 @@ import {
 } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import classNames from "classnames";
+// import "@radix-ui/react-dropdown-menu/dist/";
 
 const links = [
   {
@@ -60,8 +63,8 @@ const Navbar = () => {
               />
             </li>
           ))}
-          {/* {hash} */}
-          <li className="laptop:hidden">
+          {/* <li className="laptop:hidden"> */}
+          <li>
             <MenuButton />
           </li>
           <li>
@@ -94,20 +97,54 @@ const MenuButton = ({
   const toggle = React.useCallback(() => setOpen((prev) => !prev), [open]);
 
   return (
-    <IconButton onClick={toggle} size="sm" mode="text">
-      {open ? (
-        <Cross1Icon
-          className={`dark:text-white text-gray-950 transition-all duration-300 ease-in-out ${
-            open ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ) : (
-        <HamburgerMenuIcon
-          className={`dark:text-white text-gray-950 transition-all duration-300 ease-in-out ${
-            open ? "opacity-0" : "opacity-100"
-          }`}
-        />
-      )}
-    </IconButton>
+    <div className="relative inline-block text-left">
+      <DropdownMenu.Root open={open} onOpenChange={(open) => setOpen(open)}>
+        <DropdownMenu.Trigger asChild>
+          <IconButton onClick={toggle} size="sm" mode="text">
+            {open ? (
+              <Cross1Icon
+                className={`dark:text-white text-gray-950 transition-all duration-300 ease-in-out ${
+                  open ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ) : (
+              <HamburgerMenuIcon
+                className={`dark:text-white text-gray-950 transition-all duration-300 ease-in-out ${
+                  open ? "opacity-0" : "opacity-100"
+                }`}
+              />
+            )}
+          </IconButton>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Portal>
+          <DropdownMenu.Content
+            side="top"
+            align="start"
+            sideOffset={50}
+            className={classNames(
+              "bg-white radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
+              "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
+              "bg-white dark:bg-gray-800"
+            )}
+            sticky="always"
+          >
+            <DropdownMenu.Item
+              className={classNames(
+                "flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none",
+                "text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900"
+              )}
+            >
+              New Tab <div className="RightSlot">⌘+T</div>
+            </DropdownMenu.Item>
+            <DropdownMenu.Item className="DropdownMenuItem">
+              New Tab <div className="RightSlot">⌘+T</div>
+            </DropdownMenu.Item>
+            <DropdownMenu.Item className="DropdownMenuItem">
+              New Tab <div className="RightSlot">⌘+T</div>
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+      </DropdownMenu.Root>
+    </div>
   );
 };

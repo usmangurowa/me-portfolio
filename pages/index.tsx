@@ -8,6 +8,18 @@ import {
   InstagramLogoIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
+
+import { FaNodeJs } from "react-icons/fa";
+import {
+  SiTailwindcss,
+  SiReact,
+  SiMongodb,
+  SiFastify,
+  SiPostgresql,
+  SiNestjs,
+  SiExpress,
+} from "react-icons/si";
+import { TbBrandNextjs } from "react-icons/tb";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Button from "@/components/common/Button";
@@ -36,6 +48,49 @@ const socials = [
   },
 ];
 
+const tools = [
+  {
+    name: "ReactJS",
+    icon: SiReact,
+  },
+  {
+    name: "NextJS",
+    icon: TbBrandNextjs,
+  },
+  {
+    name: "Tailwind CSS",
+    icon: SiTailwindcss,
+  },
+  {
+    name: "React Native",
+    icon: SiReact,
+  },
+  {
+    name: "NodeJS",
+    icon: FaNodeJs,
+  },
+  {
+    name: "ExpressJS",
+    icon: SiExpress,
+  },
+  {
+    name: "Fastify",
+    icon: SiFastify,
+  },
+  {
+    name: "NestJS",
+    icon: SiNestjs,
+  },
+  {
+    name: "PostgreSQL",
+    icon: SiPostgresql,
+  },
+  {
+    name: "MongoDB",
+    icon: SiMongodb,
+  },
+];
+
 const Main = () => {
   return (
     <>
@@ -46,7 +101,7 @@ const Main = () => {
           <motion.div
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="relative w-40 h-40 border rounded-full shadow-lg shadow-black hover:animate-pulse"
+            className="relative w-40 h-40 border rounded-full shadow-md shadow-gray-800 "
           >
             <Image
               src={require("../public/me.jpg")}
@@ -124,11 +179,23 @@ const Main = () => {
             together!
           </p>
         </div>
-        <div>
+        <div className="space-y-4">
           <h1 className="text-lg font-semibold">
             <Balancer>Tools</Balancer>
           </h1>
           <p>Here are the list of Languages, Frameworks and Tools i use.</p>
+          <div className="grid grid-cols-2 gap-10 tablet:grid-cols-3 laptop:grid-cols-4">
+            {tools.map((tool, index) => (
+              <div
+                key={index}
+                className="relative flex items-center space-x-2 cursor-pointer group whitespace-nowrap"
+              >
+                <div className="absolute top-0 left-0 w-1 h-full transition-all opacity-0 dark:bg-gray-900 bg-gray-50 group-hover:w-full group-hover:opacity-100" />
+                <tool.icon size={30} className="z-50" />
+                <span className="z-50">{tool.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
         {/* <Projects /> */}
       </main>

@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import Providers from "@/components/providers";
 import Navbar from "@/components/shared/Navbar";
 import Head from "next/head";
+import Footer from "@/components/shared/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Providers>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </Providers>
     </>
   );
