@@ -1,11 +1,13 @@
 import Link from "next/link";
 import React from "react";
 import IconButton from "../common/IconButton";
+import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import {
   Cross1Icon,
   HamburgerMenuIcon,
   SunIcon,
   MoonIcon,
+  ChevronRightIcon,
 } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
@@ -63,8 +65,7 @@ const Navbar = () => {
               />
             </li>
           ))}
-          {/* <li className="laptop:hidden"> */}
-          <li>
+          <li className="laptop:hidden">
             <MenuButton />
           </li>
           <li>
@@ -99,7 +100,7 @@ const MenuButton = ({
   return (
     <div className="relative inline-block text-left">
       <DropdownMenu.Root open={open} onOpenChange={(open) => setOpen(open)}>
-        <DropdownMenu.Trigger asChild>
+        <DropdownMenu.Trigger asChild className="border-none outline-none">
           <IconButton onClick={toggle} size="sm" mode="text">
             {open ? (
               <Cross1Icon
@@ -118,30 +119,29 @@ const MenuButton = ({
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            side="top"
-            align="start"
-            sideOffset={50}
+            align="end"
+            sideOffset={5}
             className={classNames(
-              "bg-white radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
+              "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down z-[999] relative",
               "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
-              "bg-white dark:bg-gray-800"
+              "bg-white dark:bg-gray-900"
             )}
-            sticky="always"
           >
-            <DropdownMenu.Item
-              className={classNames(
-                "flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none",
-                "text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900"
-              )}
-            >
-              New Tab <div className="RightSlot">⌘+T</div>
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="DropdownMenuItem">
-              New Tab <div className="RightSlot">⌘+T</div>
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="DropdownMenuItem">
-              New Tab <div className="RightSlot">⌘+T</div>
-            </DropdownMenu.Item>
+            {links.map((link, index) => (
+              <DropdownMenu.Item
+                className={classNames(
+                  "flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none",
+                  "text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-950"
+                )}
+              >
+                <Link href={link.link} className="flex items-center w-full">
+                  <span className="flex-grow text-gray-700 dark:text-gray-300">
+                    {link.name}
+                  </span>
+                  <ChevronRightIcon className="w-4 h-4" />
+                </Link>
+              </DropdownMenu.Item>
+            ))}
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
