@@ -50,12 +50,12 @@ const Navbar = () => {
             <li key={index} className="relative hidden py-4 group laptop:block">
               <Link href={link.link}>{link.name}</Link>
               <div
-                className={`h-[2px] mt-2 mx-auto transition-all duration-300 ease-in-out dark:bg-white bg-gray-950 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-full ${
+                className={`h-[2px] mt-2 mx-auto transition-all duration-300 ease-in-out rounded-full opacity-0 group-hover:opacity-100 group-hover:w-full ${
                   router.pathname === "/" && link.link === "/"
                     ? "!w-full opacity-100 bg-primary dark:bg-primary"
                     : link.link !== "/" && router.pathname.startsWith(link.link)
                     ? "!w-full opacity-100 bg-primary dark:bg-primary"
-                    : "w-1 opacity-0"
+                    : "w-1 opacity-0 dark:bg-white bg-gray-950"
                 }`}
               />
             </li>
