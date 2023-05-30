@@ -95,13 +95,13 @@ const MenuButton = ({
 }) => {
   const [open, setOpen] = React.useState(state);
 
-  const toggle = React.useCallback(() => setOpen((prev) => !prev), [open]);
+  // const toggle = React.useCallback(() => setOpen((prev) => !prev), []);
 
   return (
     <div className="relative inline-block text-left">
       <DropdownMenu.Root open={open} onOpenChange={(open) => setOpen(open)}>
         <DropdownMenu.Trigger asChild className="border-none outline-none">
-          <IconButton onClick={toggle} size="sm" mode="text">
+          <IconButton size="sm" mode="text">
             {open ? (
               <Cross1Icon
                 className={`dark:text-white text-gray-950 transition-all duration-300 ease-in-out ${
