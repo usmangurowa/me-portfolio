@@ -22,15 +22,11 @@ const links = [
   },
   {
     name: "Projects",
-    link: "#projects",
+    link: "/projects",
   },
   {
     name: "Blog",
-    link: "#blog",
-  },
-  {
-    name: "Contact",
-    link: "#contact",
+    link: "/blog",
   },
 ];
 
@@ -41,11 +37,6 @@ const Navbar = () => {
   }, [theme, setTheme]);
 
   const router = useRouter();
-
-  const hash = React.useMemo(
-    () => router.asPath.split("#")[1],
-    [router.asPath]
-  );
 
   return (
     <>
@@ -60,7 +51,11 @@ const Navbar = () => {
               <Link href={link.link}>{link.name}</Link>
               <div
                 className={`h-[2px] mt-2 mx-auto transition-all duration-300 ease-in-out dark:bg-white bg-gray-950 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-full ${
-                  hash === link.link ? "!w-full opacity-100" : "w-1 opacity-0"
+                  router.pathname === "/" && link.link === "/"
+                    ? "!w-full opacity-100 bg-primary dark:bg-primary"
+                    : link.link !== "/" && router.pathname.startsWith(link.link)
+                    ? "!w-full opacity-100 bg-primary dark:bg-primary"
+                    : "w-1 opacity-0"
                 }`}
               />
             </li>
@@ -68,7 +63,7 @@ const Navbar = () => {
           <li className="laptop:hidden">
             <MenuButton />
           </li>
-          <li>
+          <li className="hidden laptop:block">
             <IconButton size="sm" onClick={toggleTheme}>
               {theme === "dark" ? (
                 <SunIcon className="dark:text-white text-gray-950" />
@@ -94,6 +89,14 @@ const MenuButton = ({
   toggle?: (state: boolean) => void;
 }) => {
   const [open, setOpen] = React.useState(state);
+
+  const router = useRouter();
+
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = React.useCallback(() => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  }, [theme, setTheme]);
 
   // const toggle = React.useCallback(() => setOpen((prev) => !prev), []);
 
@@ -132,17 +135,42 @@ const MenuButton = ({
                 key={index}
                 className={classNames(
                   "flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none",
-                  "text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-950"
+                  "focus:bg-gray-50 dark:focus:bg-gray-950",
+                  `${
+                    router.pathname === "/" && link.link === "/"
+                      ? "bg-primary dark:text-white"
+                      : link.link !== "/" &&
+                        router.pathname.startsWith(link.link)
+                      ? "bg-primary dark:text-white"
+                      : "dark:text-gray-50 text-gray-950"
+                  }`
                 )}
               >
                 <Link href={link.link} className="flex items-center w-full">
-                  <span className="flex-grow text-gray-700 dark:text-gray-300">
-                    {link.name}
-                  </span>
+                  <span className="flex-grow ">{link.name}</span>
                   <ChevronRightIcon className="w-4 h-4" />
                 </Link>
               </DropdownMenu.Item>
             ))}
+            <DropdownMenu.Item
+              onClick={toggleTheme}
+              className={classNames(
+                "flex  cursor-pointer select-none items-center rounded-md px-2 py-2 text-xs outline-none",
+                "focus:bg-gray-50 dark:focus:bg-gray-950 dark:text-gray-50 text-gray-950"
+              )}
+            >
+              <div className="flex items-center w-full">
+                <span className="flex-grow ">
+                  {theme === "light" ? "Dark" : "Light"} Mode
+                </span>
+
+                {theme === "dark" ? (
+                  <SunIcon className="dark:text-white text-gray-950" />
+                ) : (
+                  <MoonIcon className="dark:text-white text-gray-950" />
+                )}
+              </div>
+            </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
