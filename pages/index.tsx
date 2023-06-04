@@ -48,6 +48,60 @@ const socials = [
   },
 ];
 
+// array of 100 random colors
+const colors = [
+  "#FF6633",
+  "#FFB399",
+  "#FF33FF",
+  "#FFFF99",
+  "#00B3E6",
+  "#E6B333",
+  "#3366E6",
+  "#999966",
+  "#99FF99",
+  "#B34D4D",
+  "#80B300",
+  "#809900",
+  "#E6B3B3",
+  "#6680B3",
+  "#66991A",
+  "#FF99E6",
+  "#CCFF1A",
+  "#FF1A66",
+  "#E6331A",
+  "#33FFCC",
+  "#66994D",
+  "#B366CC",
+  "#4D8000",
+  "#B33300",
+  "#CC80CC",
+  "#66664D",
+  "#991AFF",
+  "#E666FF",
+  "#4DB3FF",
+  "#1AB399",
+  "#E666B3",
+  "#33991A",
+  "#CC9999",
+  "#B3B31A",
+  "#00E680",
+  "#4D8066",
+  "#809980",
+  "#E6FF80",
+  "#1AFF33",
+  "#999933",
+  "#FF3380",
+  "#CCCC00",
+  "#66E64D",
+  "#4D80CC",
+  "#9900B3",
+  "#E64D66",
+  "#4DB380",
+  "#FF4D4D",
+  "#99E6E6",
+  "#6666FF",
+];
+
 const tools = [
   {
     name: "ReactJS",
@@ -185,19 +239,19 @@ const Main = () => {
           </h1>
           <p>Here are the list of Languages, Frameworks and Tools i use.</p>
           <div className="grid grid-cols-2 gap-10 tablet:grid-cols-3 laptop:grid-cols-4">
-            {tools.map((tool, index) => (
-              <div
-                key={index}
-                className="relative flex items-center space-x-2 cursor-pointer group whitespace-nowrap"
-              >
-                <div className="absolute top-0 left-0 w-1 h-full transition-all opacity-0 dark:bg-gray-900 bg-gray-50 group-hover:w-full group-hover:opacity-100" />
-                <tool.icon size={30} className="z-50" />
-                <span className="z-50">{tool.name}</span>
-              </div>
-            ))}
+            {tools.map((tool, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`flex items-center  p-2 space-x-2 rounded-full cursor-pointer whitespace-nowrap`}
+                >
+                  <tool.icon size={30} className="z-50" />
+                  <span className="z-50">{tool.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
-        {/* <Projects /> */}
       </main>
       <div></div>
     </>
